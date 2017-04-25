@@ -8,7 +8,8 @@ def print(student)
 
 count =0
   while count < (student.count)
-      puts " #{count + 1}. #{student[count][:name]}, from #{student[count][:countryofbirth]} and likes to #{student[count][:hobby]}  (#{student[count][:cohort]} cohort)"
+      string = " #{count + 1}. #{student[count][:name]}, from #{student[count][:countryofbirth]} and likes to #{student[count][:hobby]}  (#{student[count][:cohort]} cohort)"
+      puts string.center(100)
       count = count + 1
     end
 
