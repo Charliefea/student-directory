@@ -19,7 +19,7 @@ end
 
 def print(students, letter)
     students.each_with_index do |student, index|
-      if letter == student[:name][0].upcase
+      if student[:name].length < 12
       puts " #{index +1}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
