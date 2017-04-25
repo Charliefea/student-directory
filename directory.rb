@@ -8,7 +8,7 @@ def print(student)
 
 count =0
   while count < (student.count)
-      puts " #{count + 1}. #{student[count][:name]} (#{student[count][:cohort]} cohort)"
+      puts " #{count + 1}. #{student[count][:name]}, from #{student[count][:countryofbirth]} and likes to #{student[count][:hobby]}  (#{student[count][:cohort]} cohort)"
       count = count + 1
     end
 
@@ -25,8 +25,14 @@ def input_students
   students = []
   name = gets.chomp
   while !name.empty? do
-    students << {name: name, cohort: :november}
+    puts "What is their hobby?"
+    hobby = gets.chomp
+    puts "What is their country of birth?"
+    birth = gets.chomp
+
+    students << {name: name, cohort: :november, hobby: hobby, countryofbirth: birth  }
     puts "Now we have #{students.count} students"
+
     name = gets.chomp
   end
   students
