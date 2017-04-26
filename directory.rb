@@ -8,7 +8,7 @@ def print(student)
 
 count =0
   while count < (student.count)
-      string = " #{count + 1}. #{student[count][:name]}, from #{student[count][:countryofbirth]} and likes to #{student[count][:hobby]}  (#{student[count][:cohort]} cohort)"
+      string = " #{count + 1}. #{student[count][:name]},(#{student[count][:cohort]} cohort)"
       puts string.center(100)
       count = count + 1
     end
@@ -21,17 +21,24 @@ def print_footer(names)
 end
 
 def input_students
+  months = ['january','february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   students = []
   name = gets.chomp
   while !name.empty? do
-    puts "What is their hobby?"
-    hobby = gets.chomp
-    puts "What is their country of birth?"
-    birth = gets.chomp
+    puts "Which cohort?"
+    cohort = gets.chomp
 
-    students << {name: name, cohort: :november, hobby: hobby, countryofbirth: birth  }
+    while cohort.empty? do
+      puts "Please enter a valid cohort"
+      cohort = gets.chomp
+    end
+    while !months.include?(cohort.downcase) do
+      puts "Please enter a valid cohort"
+      cohort = gets.chomp
+    end
+    students << {name: name, cohort: cohort.capitalize.to_sym, }
     puts "Now we have #{students.count} students"
 
     name = gets.chomp
