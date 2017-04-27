@@ -11,25 +11,24 @@ def print(student)
   count = 1
   months.each do |month|
     student.each do |studentdata|
-    if month == studentdata[:cohort] 
-    string = "#{count} #{studentdata[:name]},(#{studentdata[:cohort]} cohort)"
-        puts string.center(100)
-        count = count + 1
+      if month == studentdata[:cohort] 
+      string = "#{count} #{studentdata[:name]},(#{studentdata[:cohort]} cohort)"
+          puts string.center(100)
+          count = count + 1
+      end
     end
-  end
   end 
-  #  count =0
-  #  while count < (student.count)
-  #      string = " #{count + 1}. #{student[count][:name]},(#{student[count][:cohort]} cohort)"
-  #      puts string.center(100)
-  #      count = count + 1
-  #  end
- 
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
   
+  if names.count == 1
+      puts "Overall, we have a great student"
+      name = gets.chomp
+  else
+      puts "Now we have #{names .count} students"
+      name = gets.chomp
+  end 
 end
 
 def input_students
@@ -53,8 +52,14 @@ def input_students
     end
     
     students << {name: name, cohort: cohort.capitalize.to_sym, }
-    puts "Now we have #{students.count} students"
-    name = gets.chomp
+    
+      if students.count == 1
+      puts "Now we have #{students.count} student"
+      name = gets.chomp
+      else
+      puts "Now we have #{students.count} students"
+      name = gets.chomp
+      end 
   end
   
   students
