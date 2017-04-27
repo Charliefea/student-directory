@@ -15,7 +15,6 @@ count =0
 
 end
 
-
 def print_footer(names)
   puts "Overall, we have #{names.count} great students"
 end
