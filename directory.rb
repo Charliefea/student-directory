@@ -5,18 +5,31 @@ def print_header
 end
 
 def print(student)
-
-count =0
-  while count < (student.count)
-      string = " #{count + 1}. #{student[count][:name]},(#{student[count][:cohort]} cohort)"
-      puts string.center(100)
-      count = count + 1
+  months = []
+  months = student.map {|x| x[:cohort]}
+  months = months.uniq
+  count = 1
+  months.each do |month|
+    student.each do |studentdata|
+    if month == studentdata[:cohort] 
+    string = "#{count} #{studentdata[:name]},(#{studentdata[:cohort]} cohort)"
+        puts string.center(100)
+        count = count + 1
     end
+  end
+  end 
+  #  count =0
+  #  while count < (student.count)
+  #      string = " #{count + 1}. #{student[count][:name]},(#{student[count][:cohort]} cohort)"
+  #      puts string.center(100)
+  #      count = count + 1
+  #  end
  
 end
 
 def print_footer(names)
   puts "Overall, we have #{names.count} great students"
+  
 end
 
 def input_students
@@ -27,23 +40,26 @@ def input_students
   name = gets.chomp
   while !name.empty? do
     puts "Which cohort?"
-    cohort = gets.chomp
+    cohort = gets.chomp.downcase
 
     while cohort.empty? do
       puts "Please enter a valid cohort"
-      cohort = gets.chomp
+      cohort = gets.chomp.downcase
     end
-    while !months.include?(cohort.downcase) do
+    
+    while !months.include?(cohort) do
       puts "Please enter a valid cohort"
-      cohort = gets.chomp
+      cohort = gets.chomp.downcase
     end
+    
     students << {name: name, cohort: cohort.capitalize.to_sym, }
     puts "Now we have #{students.count} students"
-
     name = gets.chomp
   end
+  
   students
 end
+
 students = input_students
 print_header
 print(students)
