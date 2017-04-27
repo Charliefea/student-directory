@@ -12,7 +12,7 @@ count =0
       puts string.center(100)
       count = count + 1
     end
-
+ 
 end
 
 def print_footer(names)
