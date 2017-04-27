@@ -24,10 +24,10 @@ def print_footer(names)
   
   if names.count == 1
       puts "Overall, we have a great student"
-      name = gets.chomp
+      
   else
       puts "Now we have #{names .count} students"
-      name = gets.chomp
+      
   end 
 end
 
@@ -36,29 +36,29 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   students = []
-  name = gets.chomp
+  name = gets.chop
   while !name.empty? do
     puts "Which cohort?"
-    cohort = gets.chomp.downcase
+    cohort = gets.chop.downcase
 
     while cohort.empty? do
       puts "Please enter a valid cohort"
-      cohort = gets.chomp.downcase
+      cohort = gets.chop.downcase
     end
     
     while !months.include?(cohort) do
       puts "Please enter a valid cohort"
-      cohort = gets.chomp.downcase
+      cohort = gets.chop.downcase
     end
     
     students << {name: name, cohort: cohort.capitalize.to_sym, }
     
       if students.count == 1
       puts "Now we have #{students.count} student"
-      name = gets.chomp
+      name = gets.chop
       else
       puts "Now we have #{students.count} students"
-      name = gets.chomp
+      name = gets.chop
       end 
   end
   
