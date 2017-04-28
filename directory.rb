@@ -5,6 +5,10 @@ def print_header
 end
 
 def print(student)
+  
+  if student.count == 0 
+    puts "There are no students"
+  else
   months = []
   months = student.map {|x| x[:cohort]}
   months = months.uniq
@@ -18,6 +22,7 @@ def print(student)
       end
     end
   end 
+  end
 end
 
 def print_footer(names)
@@ -26,7 +31,7 @@ def print_footer(names)
       puts "Overall, we have a great student"
       
   else
-      puts "Now we have #{names .count} students"
+      puts "Now we have #{names.count} students"
       
   end 
 end
