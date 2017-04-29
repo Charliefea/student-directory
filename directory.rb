@@ -40,29 +40,29 @@ def input_students
   months = ['january','february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  name = gets.chop
+  name = STDIN.gets.chop
   while !name.empty? do
     puts "Which cohort?"
-    cohort = gets.chop.downcase
+    cohort = STDIN.gets.chop.downcase
 
     while cohort.empty? do
       puts "Please enter a valid cohort"
-      cohort = gets.chop.downcase
+      cohort = STDIN.gets.chop.downcase
     end
     
     while !months.include?(cohort) do
       puts "Please enter a valid cohort"
-      cohort = gets.chop.downcase
+      cohort = STDIN.gets.chop.downcase
     end
     
     @students << {name: name, cohort: cohort.capitalize.to_sym, }
     
       if @students.count == 1
       puts "Now we have #{@students.count} student"
-      name = gets.chop
+      name = STDIN.gets.chop
       else
       puts "Now we have #{@students.count} students"
-      name = gets.chop
+      name = STDIN.gets.chop
       end 
   end
   
@@ -72,8 +72,9 @@ end
 def interative_menu
   students = []
   loop do
+    
     print_menu()
-    process(gets.chomp) 
+    process(STDIN.gets.chomp) 
   end
 end
 
@@ -104,14 +105,30 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
     @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
 end
+
+
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+      puts "Loaded #{@students.count} from #{filename}"
+    else 
+      puts "Sorry, #{filename} doesn't exist"
+      exit 
+    end
+  end 
+      
+      
+      
 
 def print_menu
   puts "1. Input the students"
@@ -127,4 +144,5 @@ def show_students
   print_footer
 end
 
+try_load_students
 interative_menu()
