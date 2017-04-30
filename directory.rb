@@ -29,8 +29,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list to a file of your choosing"
+  puts "4. Load the list to a file of your choosing"
   puts "9. Exit"
 end
 
@@ -44,11 +44,13 @@ def process(selection)
       feedback(2)
       show_students()
     when "3"
-      feedback(3)
-      save_students()
+      userfilename = ask_filename
+      save_students(userfilename)
+      feedback (3)
     when "4"
+      userfilename = ask_filename
+      load_students(userfilename)
       feedback (4)
-      load_students()
     when "9"
       feedback(9)
       exit
@@ -61,6 +63,12 @@ end
 def feedback (selection)
  puts  "Option #{selection} has been successful"
 end 
+
+#Ask user for a file name 
+def ask_filename
+  puts "Which file would you like to use?"
+  filename = STDIN.gets.chomp
+end
 
 #Main method for the first task of the menu, inputting students 
 def input_students 
@@ -128,7 +136,7 @@ def print_footer
 end
 
 #Option 3 of the menu,saves the names of the students to a file
-def save_students
+def save_students(filename = "students.csv")
   file = File.open("students.csv", "w")
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
