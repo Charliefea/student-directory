@@ -54,9 +54,7 @@ def input_students
       puts "Please enter a valid cohort"
       cohort = STDIN.gets.chop.downcase
     end
-    
-    @students << {name: name, cohort: cohort.capitalize.to_sym, }
-    
+    add_students(name, cohort)
       if @students.count == 1
       puts "Now we have #{@students.count} student"
       name = STDIN.gets.chop
@@ -109,7 +107,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+    add_students(name, cohort)
   end
   file.close
 end
@@ -127,8 +125,9 @@ def try_load_students
     end
   end 
       
-      
-      
+def add_students (name, cohort)
+ @students << {name: name, cohort: cohort.capitalize.to_sym}
+end
 
 def print_menu
   puts "1. Input the students"
