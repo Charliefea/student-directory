@@ -148,12 +148,12 @@ end
 
 #Loads students from file. Option 4 from the menu
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
+  file = File.open(filename, "r")  do |file|
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
     add_students(name, cohort)
   end
-  file.close
+end
 end
 
 #Adds students to the @students array
