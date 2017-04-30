@@ -1,3 +1,4 @@
+require 'csv'
 @students = []
 @months = ['january','february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
 
@@ -30,7 +31,7 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to a file of your choosing"
-  puts "4. Load the list to a file of your choosing"
+  puts "4. Load the list from a file of your choosing"
   puts "9. Exit"
 end
 
@@ -137,22 +138,18 @@ end
 
 #Option 3 of the menu,saves the names of the students to a file
 def save_students(filename = "students.csv")
-  file = File.open("students.csv", "w")
+  CSV.open(filename, "wb") do |csv| 
   @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+    csv << [student[:name], student[:cohort]]
   end 
-  file.close
+  end
 end
 
 #Loads students from file. Option 4 from the menu
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")  do |file|
-  file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
+  CSV.foreach(filename) do |row|
+  name, cohort = row
     add_students(name, cohort)
-  end
 end
 end
 
